@@ -140,28 +140,36 @@ function App() {
   // console.log(possibleMarry(700, false, '중'))
   // console.log(possibleMarry(100, false, '상'))
 
-  // Q4
-  const convertArray = (array: (number | string)[]): void => {
-    let convertedArray = array.map((item, index) => (typeof item === 'string' ? Number(item) : item));
-    //onsole.log(convertedArray);
+  // Q4 배열받아서 배열 안에 item들 전부 숫자로 바꾸기
+  const changeToNumber = (x: (string | number)[]): void => {
+    for (let i = 0; i < x.length; i++) {
+      if (typeof x[i] === 'string') {
+        x[i] = Number(x[i]);
+      }
+    }
+    // console.log(x);
   };
-  ///console.log(convertArray([1, 2, 3, '4', '5', 6]));
+  changeToNumber([1, 2, '3', 4, 5, '7']);
 
-  //Q5
+  // Q5
 
   let 철수쌤 = { subject: 'math' };
   let 영희쌤 = { subject: ['science', 'english'] };
   let 민수쌤 = { subject: ['science', 'art', 'korean'] };
 
-  const printLastSubject = (x: { subject: string | string[] }): string => {
-    if (typeof x.subject === 'string') return x.subject;
-    else if (Array.isArray(x.subject)) return x.subject[x.subject.length - 1];
-    else return '없음';
+  const printLastSubject = (x: { subject: string | string[] }): void => {
+    if (typeof x.subject === 'string') {
+      console.log(x.subject);
+    } else if (Array.isArray(x.subject)) {
+      console.log(x.subject[x.subject.length - 1]);
+    } else {
+      console.log('출력할거 없음!');
+    }
   };
 
-  console.log(printLastSubject(철수쌤));
-  console.log(printLastSubject(영희쌤));
-  console.log(printLastSubject(민수쌤));
+  // printLastSubject(철수쌤);
+  // printLastSubject(영희쌤);
+  // printLastSubject(민수쌤);
 
   return (
     <div>
