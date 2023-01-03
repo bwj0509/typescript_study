@@ -171,6 +171,60 @@ function App() {
   // printLastSubject(영희쌤);
   // printLastSubject(민수쌤);
 
+  type Animal = string | number | undefined;
+  let ani: Animal = 3;
+  ani = undefined;
+  ani = 'test';
+
+  // Name이라는 변수는 string, Age라는 변수는 number -> Person은 string or number
+  type Name = string;
+  type Age = number;
+  type Person = Name | Age;
+
+  // positionX랑 Y의 타입을 정의하고 Newtype을 만들어 X와Y를 합쳐준다.
+  type PositionX = { x: number };
+  type PositionY = { y: number };
+  type NewType = PositionX & PositionY;
+  let position: NewType = { x: 10, y: 20 };
+
+  // Q1
+  type Property = {
+    color?: string;
+    size: number;
+    readonly position: number[];
+  };
+  let boxs: Property = {
+    color: 'red',
+    size: 10,
+    position: [1, 2, 3],
+  };
+
+  // Q2
+  type Userinfo = {
+    name: string;
+    phone: number;
+    email?: string;
+  };
+  type Adult = { adult: boolean };
+
+  type NewUser = Userinfo & Adult;
+
+  // 수업중에 진행한 가위바위보 함수 만들기
+  type Rsp = '가위' | '바위' | '보'; // Rsp를 아래 식에 넣어줘도 정상 작동!
+  const rsp = (x: '가위' | '바위' | '보'): ('가위' | '바위' | '보')[] => {
+    return ['가위', '보'];
+  };
+
+  // about as const
+  var 자료 = {
+    name: 'kim',
+  } as const;
+  // as const의 효과 1. 타입을 Object의 value로 바꿔준다. -> 타입을 kim으로 바꿔줌
+  // 2. object안의 모든 속성을 readonly로 바꿔준다. -> 변경시 에러 발생
+
+  const 내함수 = (x: 'kim') => {};
+  내함수(자료.name);
+
   return (
     <div>
       <h1>테스트입니다.</h1>
