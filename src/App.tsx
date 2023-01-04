@@ -225,6 +225,115 @@ function App() {
   const 내함수 = (x: 'kim') => {};
   내함수(자료.name);
 
+  // 함수에 들어갈 타입도 type alias로 저장 가능!
+  type Sum = (x: number, y: number) => number;
+
+  let sumNumber: Sum = (x, y) => {
+    return x + y;
+  };
+
+  //회원 정보 Object를 타입지정 해보기!
+  type Userinfos = {
+    name: string;
+    age: number;
+    plusOne: (x: number) => number;
+    changeName: () => void;
+  };
+  let 회원정보: Userinfos = {
+    name: 'kim',
+    age: 30,
+    plusOne: (x) => {
+      return x + 1;
+    },
+    changeName: () => {
+      console.log('안녕');
+    },
+  };
+
+  //젤 앞글자 0 지우기, 전화번호 하이폰 빼는 함수 타입 지정 연습
+  type CutZero = (s: string) => string;
+
+  let cutZero: CutZero = (s) => {
+    s[0] === '0' ? (s = s.replace('0', '')) : null;
+    return s;
+  };
+  // console.log(cutZero('0fae'));
+
+  let removeDash = (s: string): number => {
+    s = s.replace(/-/g, '');
+    return Number(s);
+  };
+  // console.log(removeDash('010-5011-8246'));
+
+  type MultiFn = (s: string, cutZero: CutZero, removeDash: (s: string) => number) => {};
+  let multiFn: MultiFn = (s, cutZero, removeDash) => {
+    let result = removeDash(cutZero(s));
+    return Number(result);
+  };
+  console.log(multiFn('010-5011-8246', cutZero, removeDash));
+
+  //interface 사용 기본형!!! type이랑 비슷한데 =가 사라진다! 인터페이스는 중복 선언 가능하고 type은 불가능하다.
+  interface Square {
+    color: string;
+    width: number;
+  }
+
+  let nemo: Square = {
+    color: 'red',
+    width: 100,
+  };
+
+  // Q1
+  interface Student {
+    name: string;
+  }
+  interface Teacher extends Student {
+    age: number;
+  }
+  let 학생: Student = { name: 'kim' };
+  let 선생: Teacher = { name: 'kim', age: 20 };
+
+  // Q2 인터페이스 작성해보기
+  interface Product {
+    brand: string;
+    serialNumber: number;
+    model: string[];
+  }
+  let 상품: Product = {
+    brand: 'Samsung',
+    serialNumber: 1360,
+    model: ['TV', 'phone'],
+  };
+
+  // Q3 인터페이스 작성해보기
+  interface Cart {
+    product: string;
+    price: number;
+  }
+
+  interface Cart2 extends Cart {
+    card?: boolean;
+  }
+
+  let 장바구니: Cart2[] = [
+    { product: '청소기', price: 7000 },
+    { product: '삼다수', price: 800 },
+    { product: '삼다수2', price: 8001, card: true },
+  ];
+
+  // Q4 인터페이스 작성해보기
+  interface Cal {
+    [key: string]: (a: number, b: number) => number;
+  }
+
+  let cal: Cal = {
+    plus: (a, b) => {
+      return a + b;
+    },
+    minus: (a, b) => {
+      return a - b;
+    },
+  };
   return (
     <div>
       <h1>테스트입니다.</h1>
